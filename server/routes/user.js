@@ -45,7 +45,7 @@ router.post('/rating', requireAuth, (req, res) => {
   // Calculate the new rating of the user.
   const rating = Rating.getNewRating(oldRating, quoteRating, gameResult);
 
-  User.findByIdAndUpdate({ _id: req.user._id }, rating, { new: true }, (err, user) => {
+  User.findByIdAndUpdate({ _id: req.user._id }, rating, { new: true }, (err) => {
     if (err) {
       res.status(400).send({ err, message: 'Error updating rating 💥' });
     }

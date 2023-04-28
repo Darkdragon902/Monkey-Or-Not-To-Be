@@ -1,7 +1,5 @@
-
-
 const express = require('express');
-const path = require("path");
+const path = require('path');
 const bodyParser = require('body-parser');
 
 require('./config/environment');
@@ -13,7 +11,7 @@ const configPassport  = require('./passport/config');
 const app = express();
 const assetFolder  = path.resolve(__dirname, '../dist/');
 
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 app.use(express.static(assetFolder));
 app.use(bodyParser.json());
