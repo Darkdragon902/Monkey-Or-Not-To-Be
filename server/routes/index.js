@@ -13,6 +13,8 @@ router.use('/api/user', user);
 router.use('/api/users', users);
 router.use('/api/todos', todos);
 
+module.exports = router
+
 router.get('/api/tags', (req, res) => {
   res.send([
     'MERN', 'Node', 'Express', 'Webpack', 'React', 'Redux', 'Mongoose',
