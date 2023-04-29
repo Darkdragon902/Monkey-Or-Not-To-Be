@@ -34,6 +34,15 @@ userSchema.plugin(AutoIncrementID, {
   trackerModelName: 'User',
 });
 
+userSchema.plugin({
+  field: 'winCount',
+  startAt: 0,
+});
+userSchema.plugin({
+  field: 'lossCount',
+  startAt: 0,
+});
+
 userSchema.virtual('full_name').get(function() {
   if (this.first_name && this.last_name) {
     return `${this.first_name} ${this.last_name}`;
