@@ -1,25 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Game.css";
 
 export const Game = () => {
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [boxes, setBoxes] = useState([
-    { id: 1, text: "Incorrect" },
-    { id: 2, text: "Correct", isCorrect: true },
-    { id: 3, text: "Incorrect" },
+    { id: 1, text: "To be or not to be, that is the question.", isCorrect: false },
+    { id: 2, text: "All the world's a stage, and all the men and women merely players.", isCorrect: true },
+    { id: 3, text: "There are more things in heaven and earth, Horatio, than are dreamt of in your philosophy.", isCorrect: false },
   ]);
+
+  useEffect(() => {
+    setBoxes((prevBoxes) => prevBoxes.sort(() => Math.random() - 0.5));
+  }, [score]);
 
   const handleBoxClick = (boxId) => {
     const selectedBox = boxes.find((box) => box.id === boxId);
     if (selectedBox.isCorrect) {
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1);
+    } else {
+      setScore(0);
     }
-    setBoxes([
-      { id: 1, text: "Incorrect" },
-      { id: 2, text: "Correct", isCorrect: true },
-      { id: 3, text: "Incorrect" },
-    ]);
+    const newBoxes = boxes.map((box) => ({
+      ...box,
+      isCorrect: box.id === boxId ? true : false,
+    }));
+    setBoxes(newBoxes);
   };
+
+  useEffect(() => {
+    if (score > highScore) {
+      setHighScore(score);
+    }
+  }, [score, highScore]);
 
   return (
     <div className="game-container">
@@ -28,7 +41,7 @@ export const Game = () => {
         {boxes.map((box) => (
           <div
             key={box.id}
-            className="box"
+            className={`box ${box.isCorrect ? "correct" : ""}`}
             onClick={() => handleBoxClick(box.id)}
           >
             <p>{box.text}</p>
@@ -37,6 +50,7 @@ export const Game = () => {
       </div>
       <div className="score-container">
         <p>Score: {score}</p>
+        <p>High Score: {highScore}</p>
       </div>
     </div>
   );
