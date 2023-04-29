@@ -14,19 +14,28 @@ export const Game = () => {
     setBoxes((prevBoxes) => prevBoxes.sort(() => Math.random() - 0.5));
   }, [score]);
 
-  const handleBoxClick = (boxId) => {
-    const selectedBox = boxes.find((box) => box.id === boxId);
-    if (selectedBox.isCorrect) {
-      setScore((prevScore) => prevScore + 1);
-    } else {
-      setScore(0);
-    }
+const handleBoxClick = (boxId) => {
+  const selectedBox = boxes.find((box) => box.id === boxId);
+  if (selectedBox.isCorrect) {
+    setScore((prevScore) => prevScore + 1);
     const newBoxes = boxes.map((box) => ({
       ...box,
       isCorrect: box.id === boxId ? true : false,
+      isFlash: box.id === boxId ? true : false, // Add a new property to the selected box to enable flashing effect
     }));
     setBoxes(newBoxes);
-  };
+    setTimeout(() => { // Remove the "flash" class after 500 milliseconds
+      const updatedBoxes = newBoxes.map((box) => ({
+        ...box,
+        isFlash: false,
+      }));
+      setBoxes(updatedBoxes);
+    }, 500);
+  } else {
+    setScore(0);
+  }
+};
+
 
   useEffect(() => {
     if (score > highScore) {
