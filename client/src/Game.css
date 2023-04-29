@@ -1,48 +1,90 @@
+body, html {
+  height: 100%;
+}
+
 .game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    color: white;
-  }
-  
-  h2 {
-    font-size: 48px;
-    margin-top: 80px;
-  }
-  
-  .boxes-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 80px;
-    width: 80%;
-  }
-  
-  .box {
-    width: 30%;
-    height: 200px;
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-image: url("https://t4.ftcdn.net/jpg/04/08/35/37/360_F_408353734_0JX5eErBWm2CypRBYAx7kEt8J7WG7Zdy.jpg");
+  background-size: cover;
+}
+
+h2 {
+  font-size: 48px;
+  margin-top: 80px;
+}
+
+.boxes-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+  width: 80%;
+}
+
+.box {
+  width: 29%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #807d7d;
+  margin-top: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.box p {
+  text-align: center;
+}
+
+.box:hover {
+  background-color: #f1f1f1;
+  color: #252525;
+}
+
+.score-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .game-container {
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-    border-radius: 5px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
-  .box p {
-    text-align: center;
+  h2 {
+    margin-top: 50px;
+    font-size: 36px;
   }
-  
-  .box:hover {
-    background-color: #f1f1f1;
-    color: #252525;
+
+  .boxes-container {
+    margin-top: 50px;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
+  .box {
+    width: 80%;
+    margin-top: 30px;
+  }
+
   .score-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    position: relative;
+    margin-top: 50px;
     font-size: 24px;
   }
-  
+}
