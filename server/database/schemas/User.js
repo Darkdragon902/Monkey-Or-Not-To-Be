@@ -5,6 +5,13 @@ const R = require('ramda');
 
 const { Schema } = mongoose;
 
+const scoreSchema = mongoose.schema({
+  winCount: Number,
+  lossCount: Number,
+  HighScore: Number
+})
+
+
 const userSchema = new Schema({
   user: Number,
   username: { type: String, lowercase: true, required: true, unique: true, immutable: true },
@@ -14,6 +21,7 @@ const userSchema = new Schema({
   first_name: { type: String, maxlength: 20 },
   last_name: { type: String, maxlength: 20 },
   bio: { type: String, maxlength: 240 },
+  scores: [scoreSchema],
   created_at: { type: Date, default: Date.now, immutable: true },
   updated_at: { type: Date },
 }, { versionKey: false });
